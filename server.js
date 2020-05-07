@@ -1,8 +1,10 @@
 var radius = require('radius');
 var dgram = require("dgram");
+var AWS = require('aws-sdk')
 
 var secret = 'radius_secret';
 var server = dgram.createSocket("udp4");
+AWS.config.region = 'us-east-1'
 
 server.on("message", function (msg, rinfo) {
   var code, username, password, packet;
