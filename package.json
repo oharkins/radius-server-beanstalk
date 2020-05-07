@@ -1,0 +1,11 @@
+{
+  "name": "radius-server",
+  "version": "1.0.0",
+  "description": "Radius server get users from dynamodb",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Javier Hortal",
+  "license": "ISC"
+}
