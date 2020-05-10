@@ -21,13 +21,12 @@ server.on("message", function (msg, rinfo) {
 
   console.log('Access-Request for ' + username);
   
-  table.ActiveUser(username,password, (access)=>{
+  access =  table.ActiveUser(username,password);
     if (access) {
       code = 'Access-Accept';
     } else {
       code = 'Access-Reject';
     }
-
     var response = radius.encode_response({
       packet: packet,
       code: code,
@@ -42,7 +41,7 @@ server.on("message", function (msg, rinfo) {
     });
     console.log('Sended');
   });  
-})
+
 
     
   
