@@ -1,6 +1,6 @@
 const radius = require('radius');
 const dgram = require("dgram");
-const table = require('./table');
+const wifi_users = require('./wifi_users');
 
 var secret = 'radius_secret';
 const server = dgram.createSocket("udp4");
@@ -20,33 +20,32 @@ server.on("message", function (msg, rinfo) {
   password = packet.attributes['User-Password'];
 
   console.log('Access-Request for ' + username);
-  
-  access =  table.ActiveUser(username,password);
-    if (access) {
-      code = 'Access-Accept';
-    } else {
-      code = 'Access-Reject';
+
+  if (wifi_users.access(username, password)) {
+    code = 'Access-Accept';
+  } else {
+    code = 'Access-Reject';
+  }
+  var response = radius.encode_response({
+    packet: packet,
+    code: code,
+    secret: secret
+  });
+
+  console.log('Sending ' + code + ' for user ' + username);
+  server.send(response, 0, response.length, rinfo.port, rinfo.address, function (err, bytes) {
+    if (err) {
+      console.log('Error sending response to ', rinfo);
     }
-    var response = radius.encode_response({
-      packet: packet,
-      code: code,
-      secret: secret
-    });
-
-    console.log('Sending ' + code + ' for user ' + username);
-    server.send(response, 0, response.length, rinfo.port, rinfo.address, function (err, bytes) {
-      if (err) {
-        console.log('Error sending response to ', rinfo);
-      }
-    });
-    console.log('Sended');
-  });  
+  });
+  console.log('Sended');
+});
 
 
-    
-  
-    
-  
+
+
+
+
 
 
 server.on("listening", function () {
