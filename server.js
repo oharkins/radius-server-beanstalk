@@ -7,7 +7,7 @@ const server = dgram.createSocket("udp4");
 
 
 
-server.on("message", function (msg, rinfo) {
+server.on("message", async function (msg, rinfo) {
   var code, username, password, packet;
   packet = radius.decode({ packet: msg, secret: secret });
 
@@ -20,8 +20,7 @@ server.on("message", function (msg, rinfo) {
   password = packet.attributes['User-Password'];
 
   console.log('Access-Request for ' + username);
-
-  if (wifi_users.access(username, password)) {
+  if (await wifi_users.access(username, password)) {
     code = 'Access-Accept';
   } else {
     code = 'Access-Reject';
@@ -40,12 +39,6 @@ server.on("message", function (msg, rinfo) {
   });
   console.log('Sended');
 });
-
-
-
-
-
-
 
 
 server.on("listening", function () {
