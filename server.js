@@ -5,8 +5,6 @@ const wifi_users = require('./wifi_users');
 var secret = 'radius_secret';
 const server = dgram.createSocket("udp4");
 
-
-
 server.on("message", async function (msg, rinfo) {
   var code, username, password, packet;
   packet = radius.decode({ packet: msg, secret: secret });
@@ -20,11 +18,9 @@ server.on("message", async function (msg, rinfo) {
   password = packet.attributes['User-Password'];
 
   console.log('Access-Request for ' + username);
-  if (await wifi_users.access(username, password)) {
-    code = 'Access-Accept';
-  } else {
-    code = 'Access-Reject';
-  }
+  
+  code = await wifi_users.getCode(username,password);
+
   var response = radius.encode_response({
     packet: packet,
     code: code,

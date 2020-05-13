@@ -5,7 +5,7 @@ AWS.config.region = 'us-east-1';
 
 var docClient = new AWS.DynamoDB.DocumentClient();
 
-
+var access=false;
 var currentDate = Number(DateTime.local().toFormat('yyyyLLdd'));
 var params = {
     TableName: "wifi_users",
@@ -16,18 +16,13 @@ var params = {
     }    
 };
 
-module.exports.access = async (user, password) => {
-    var access=false;
+module.exports.access = async (username, password) => {
+    
     console.log("inside activeUser");    
 
-    params["ExpressionAttributeValues"] = 
-    {
-        ":user": user,
-        ":expire": currentDate,
-        ":pw": password
-    };
+    var request = this.createRequest(username,password)
 
-    await docClient.query(params).promise()
+    await docClient.query(request).promise()
         .then((data) => {
             console.log("inside Query")
             if (data.Count >= 1) {
@@ -43,5 +38,24 @@ module.exports.access = async (user, password) => {
     // return access;
 
 
+module.exports.createRequest = (username, password)=>{
+    params["ExpressionAttributeValues"] = 
+    {
+        ":user": username,
+        ":expire": currentDate,
+        ":pw": password
+    };
+    return params;
+}
 
+module.exports.getCode = async (username, password) => {
+    var code = 'Access-Reject';
+
+    if (await this.access(username,password)){
+        code = 'Access-Accept';
+    }
+
+    return code;
+
+}
 
