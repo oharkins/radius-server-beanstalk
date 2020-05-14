@@ -3,9 +3,10 @@ const dgram = require("dgram");
 const wifi_users = require('./wifi_users');
 const config = require ('config');
 
-const secret = config.get('secret');
+const secret = config.get('secret'); 
 const server = dgram.createSocket("udp4");
-
+ 
+//messages
 server.on("message", async function (msg, rinfo) {
   var code, username, password, packet;
   packet = radius.decode({ packet: msg, secret: secret });
