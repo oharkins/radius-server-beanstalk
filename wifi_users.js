@@ -22,8 +22,8 @@ module.exports.access = async (username, password) => {
                 access = true;
             }       
         })
-        .catch((eror)=>{
-            console.log("Error")
+        .catch((error)=>{
+            console.log(error)
         })
     return access;
 };
