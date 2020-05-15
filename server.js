@@ -40,9 +40,11 @@ server.on("message", async function (msg, rinfo) {
   server.send(response, 0, response.length, rinfo.port, rinfo.address, function (err, bytes) {
     if (err) {
       console.log('Error sending response to ', rinfo);
+    }else{
+      console.log("Sended to" + rinfo.address);
     }
   });
-  console.log('Sended');
+  
 });
 
 
