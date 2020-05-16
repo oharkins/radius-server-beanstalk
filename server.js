@@ -25,6 +25,7 @@ server.on("message", async function (msg, rinfo) {
       break;
     case 'Accounting-Request':
       code = 'Accounting-Response';
+      console.log(packet.code);
     default:
       console.log(packet.code);
       
