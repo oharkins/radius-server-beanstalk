@@ -3,8 +3,11 @@ const dgram = require("dgram");
 const wifi_users = require('./table_utils')
 require ('dotenv').config();
 
+
 const secret = process.env.SECRET;
+console.log(secret)
 const server = dgram.createSocket("udp4");
+
  
 
 server.on("message", async function (msg, rinfo) {
