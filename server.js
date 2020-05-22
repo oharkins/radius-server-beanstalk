@@ -5,7 +5,6 @@ require ('dotenv').config();
 
 
 const secret = process.env.SECRET;
-console.log(secret)
 const server = dgram.createSocket("udp4");
 
  

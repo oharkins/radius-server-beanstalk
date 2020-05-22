@@ -1,5 +1,0 @@
-{
-    "secret":"radius_secret",
-    "AWS-region": "us-east-1",
-    "table-name": "wifi_users"
-}
