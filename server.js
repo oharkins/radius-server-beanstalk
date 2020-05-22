@@ -1,6 +1,6 @@
 const radius = require('radius');
 const dgram = require("dgram");
-const wifi_users = require('./wifi_users');
+const wifi_users = require('./table_utils')
 const config = require ('config');
 
 const secret = config.get('secret'); 

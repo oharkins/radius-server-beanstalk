@@ -1,16 +1,14 @@
 const AWS = require('aws-sdk');
 const { DateTime } = require("luxon");
+const config = require ('config');
 
-AWS.config.region = 'us-east-1';
-
-
-var docClient = new AWS.DynamoDB.DocumentClient();
-
+AWS.config.region = config.get("AWS-region");
 
 
 
 module.exports.access = async (username, password) => {
     var access=false;
+    var docClient = new AWS.DynamoDB.DocumentClient();
     console.log("inside activeUser");    
 
     var request = this.createRequest(username,password)
@@ -34,7 +32,7 @@ module.exports.access = async (username, password) => {
 module.exports.createRequest = (username, password)=>{
     var currentDate = Number(DateTime.local().toFormat('yyyyLLdd'));
     var params = {
-        TableName: "wifi_users",
+        TableName: config.get('table-name'),
         KeyConditionExpression: "#usr = :user AND ExpireDate >= :expire ",
         FilterExpression: "Password = :pw",
         ExpressionAttributeNames: {
