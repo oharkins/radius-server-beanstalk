@@ -1,9 +1,9 @@
 const radius = require('radius');
 const dgram = require("dgram");
 const wifi_users = require('./table_utils')
-const config = require ('config');
+require ('dotenv').config();
 
-const secret = config.get('secret'); 
+const secret = process.env.SECRET;
 const server = dgram.createSocket("udp4");
  
 

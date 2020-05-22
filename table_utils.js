@@ -1,8 +1,8 @@
 const AWS = require('aws-sdk');
 const { DateTime } = require("luxon");
-const config = require ('config');
+require ('dotenv').config();
 
-AWS.config.region = config.get("AWS-region");
+AWS.config.region = process.env.AWSREGION;
 
 
 
@@ -32,7 +32,7 @@ module.exports.access = async (username, password) => {
 module.exports.createRequest = (username, password)=>{
     var currentDate = Number(DateTime.local().toFormat('yyyyLLdd'));
     var params = {
-        TableName: config.get('table-name'),
+        TableName: process.env.TABLENAME,
         KeyConditionExpression: "#usr = :user AND ExpireDate >= :expire ",
         FilterExpression: "Password = :pw",
         ExpressionAttributeNames: {
