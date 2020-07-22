@@ -7,8 +7,12 @@ node_modules/
 
 config/
 
+<<<<<<< HEAD
 *.zip
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+=======
+*.zip
+>>>>>>> bb1af87f128a97f6edeadaf3f4ffe069608d9c9d
