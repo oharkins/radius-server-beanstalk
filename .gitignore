@@ -13,3 +13,5 @@ config/
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
 *.zip
+
+env.yaml
