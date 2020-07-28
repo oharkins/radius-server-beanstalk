@@ -3,7 +3,6 @@
 
 .vscode/
 
-node_modules/
 
 config/
 
@@ -15,3 +14,4 @@ config/
 *.zip
 
 env.yaml
+READMEExample.md
