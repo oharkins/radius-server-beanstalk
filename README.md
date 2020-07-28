@@ -4,7 +4,7 @@
 
 > NOSQL database, DynamoDB
 
-> Amazon Web Services, Authentication system, serverless
+> Amazon Web Services, Authentication system, Serverless
 
 This repository deploy a full authentication system to integrated with the firewall via Radius protocol. It uses beanstalk service to autodeploy the Data Base (dynamosDB), the instances, security group and roles needed. 
 
@@ -27,6 +27,7 @@ This repository deploy a full authentication system to integrated with the firew
         ```
         eb create
         ```
+    5. Chose the configuration settings
 
 
 ---
