@@ -10,7 +10,7 @@ This repository deploy a full authentication system to integrated with the firew
 
 **Deployment**
 
-1. Choose name for the database name (DBNAME) and the SECRET in the .ebextensions/parameters.config file
+1. Choose name for the database name (DBNAME) and the SECRET in the .ebextensions/parameters.config on *Default* atributte of each parameter
 
 2. Deployment with amazon console:
     1. Open amazon beanstalk service
