@@ -2,11 +2,11 @@
 
 > Autodeployment with beanstalk
 
-> NOSQL database, DynamoDB
+> Amazon Web Services, Beanstalk, DynamoDB
 
-> Amazon Web Services, Authentication system, Serverless
+> Authentication system, Serverless, NOSQL database
 
-This repository deploy a full authentication system to integrated with the firewall via Radius protocol. It uses beanstalk service to autodeploy the Data Base (dynamosDB), the instances, security group and roles needed. 
+This repository deploy a full authentication system to integrated with the firewall via Radius protocol. It uses beanstalk service to autodeploy the Database (dynamosDB), the instances, security group and roles needed. 
 
 **Deployment**
 
@@ -15,8 +15,8 @@ This repository deploy a full authentication system to integrated with the firew
 2. Deployment with amazon console:
     1. Open amazon beanstalk service
     2. Click on Create a new environment
-    3. Chose web server environment
-    4. Chose node.js platform
+    3. Choose web server environment
+    4. Choose node.js platform
     5. Upload the this repository on a .zip
 
    Deployment with EB cli:
@@ -27,7 +27,7 @@ This repository deploy a full authentication system to integrated with the firew
         ```
         eb create
         ```
-    5. Chose the configuration settings
+    5. Choose the configuration settings
 
 
 ---
