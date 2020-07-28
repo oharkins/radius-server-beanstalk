@@ -1,6 +1,3 @@
-
-***INSERT GRAPHIC HERE (include hyperlink in image)***
-
 # Radius Server with NOSQL DB
 
 > Autodeployment with beanstalk
