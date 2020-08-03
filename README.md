@@ -23,13 +23,13 @@ This repository deploy a full authentication system to integrated with the firew
     1. Install de EB cli: [Link](https://docs.aws.amazon.com/es_es/elasticbeanstalk/latest/dg/eb-cli3.html)
     2. *During the EB cli init choose node.js platform*
     3. Open the console inside the root directory of the repository
-    4. In the console write:
+    4. Run:
         ```
         eb create
         ```
     5. Choose the configuration settings
 
-
+3. Add a register example in the Table of DynamoDB you have just created. **At least the register should have this three atributtes: User, Password and ExpireDate**
 ---
 
 ## FAQ
