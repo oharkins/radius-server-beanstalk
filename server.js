@@ -3,27 +3,31 @@ const dgram = require("dgram");
 const wifi_users = require('./table_utils')
 require ('dotenv').config();
 
+radius.add_dictionary ('mikrotik.dict');
 
-const secret = process.env.SECRET;
+
+const secret = "123456789"; // process.env.SECRET;
 const server = dgram.createSocket("udp4");
 
- 
+
 
 server.on("message", async function (msg, rinfo) {
   var code, username, password, packet;
+  
+  //console.log('rinfo : ', JSON.stringify(rinfo)); //This is from DHP Server
+
   packet = radius.decode({ packet: msg, secret: secret });
 
-  if (packet.code != 'Access-Request') {
-    console.log('unknown packet type: ', packet.code);
-    return;
-  }
+  console.log('Packet : ', JSON.stringify(packet));
+
 
   switch (packet.code){
     case 'Access-Request':
       username = packet.attributes['User-Name'];
       password = packet.attributes['User-Password'];
       console.log('Access-Request for ' + username);      
-      code = await wifi_users.getCode(username,password);
+      code = 'Access-Accept'
+      //code = await wifi_users.getCode(username,password);
       break;
     case 'Accounting-Request':
       code = 'Accounting-Response';
@@ -33,10 +37,21 @@ server.on("message", async function (msg, rinfo) {
       
   }
  
+
+  
   var response = radius.encode_response({
     packet: packet,
     code: code,
-    secret: secret
+    secret: secret,
+    attributes: [
+      ['NAS-IP-Address', '10.5.5.5'],
+      ['User-Name', 'dealing-deathtraps'],
+      ['Vendor-Specific', 14988, [['Mikrotik-Group', 'dairymaids-deprograming']]],
+      ['Vendor-Specific', 14988, [['Mikrotik-Address-List', '192.168.1.200/24']]],
+      ['Vendor-Specific', 14988, [['Mikrotik-Mark-Id', '10']]],
+      ['Vendor-Specific', 14988, [['Mikrotik-Wireless-Comment', 'Comment']]],
+
+    ]
   });
 
   console.log('Sending ' + code + ' for user ' + username);
@@ -44,10 +59,9 @@ server.on("message", async function (msg, rinfo) {
     if (err) {
       console.log('Error sending response to ', rinfo);
     }else{
-      console.log("Sended to" + rinfo.address);
+      console.log("Sent to " + rinfo.address);
     }
   });
-  
 });
 
 
@@ -57,4 +71,4 @@ server.on("listening", function () {
     address.address + ":" + address.port);
 });
 
-server.bind(1812);
+server.bind(1813);
